@@ -20,8 +20,10 @@ int main()
 		checkDetails();
 		break;
 	case 3:
+		generateStrengthTest();
 		break;
 	case 4:
+		analyseFile();
 		break;
 	default:
 		std::cout << "Invalid input, Exiting. \n";
@@ -76,4 +78,12 @@ void checkDetails() {
 		cout << "failure! \n";//password wrong
 		break;
 	}
+}
+
+void generateStrengthTest()
+{
+}
+
+void analyseFile()
+{
 }
