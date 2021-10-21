@@ -91,10 +91,6 @@ int FileManager::authenticatePassword(string username, string password)
 	return 2;
 } // 0 = No username, 1 = correct, 2 = wrong password.
 
-void FileManager::createFile(string fileName)
-{
-}
-
 int FileManager::collatz(int seed)
 {
 	int count = 0;
