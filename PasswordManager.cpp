@@ -1,5 +1,7 @@
 #include "FileManager.h"
+#include "Analyser.h"
 #include <iostream>
+#include <time.h>
 using namespace std;
 
 int menuInput();
@@ -10,6 +12,7 @@ void analyseFile();
 
 int main()
 {
+	srand(time(NULL));
     cout << "Hello World!\n";
 	int c = menuInput();
 	switch (c) {
@@ -82,8 +85,16 @@ void checkDetails() {
 
 void generateStrengthTest()
 {
+	cout << "Generating Password Test File. \n";
+	Analyser generator;
+	generator.GeneratePasswordFile();
+	cout << "Password Test File Complete. \n";
 }
 
 void analyseFile()
 {
+	cout << "Starting Strength Test. \n";
+	Analyser tester;
+	tester.StrengthTest();
+	cout << "Strength Test Complete. \n";
 }

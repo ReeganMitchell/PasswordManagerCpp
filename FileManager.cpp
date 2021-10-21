@@ -16,7 +16,7 @@ FileManager::~FileManager()
 	}
 }
 
-string FileManager::encryptPassword(string password)
+string FileManager::EncryptPassword(string password)
 {
 	int offset = 0;
 	char* c = new char[password.size() + 1];
@@ -25,7 +25,7 @@ string FileManager::encryptPassword(string password)
 
 	password.copy(c, password.size() + 1);
 	c[password.size()] = '\0';
-	std::cout << c << endl;
+	//std::cout << c << endl;
 
 	for (int x = 0; x < password.size(); x++) {
 		asciiOffset[x] = c[x] + offset;
@@ -51,14 +51,14 @@ string FileManager::encryptPassword(string password)
 void FileManager::saveToFile(string username, string password)
 {
 	file->open(fileName, ios::out | ios::app);
-	string encryptedPass = encryptPassword(password);
+	string encryptedPass = EncryptPassword(password);
 	*file << username << " " << encryptedPass << endl;
 	file->close();
 }
 
 int FileManager::authenticatePassword(string username, string password)
 {
-	password = encryptPassword(password);
+	password = EncryptPassword(password);
 	ifstream infile; 
 	infile.open(fileName, ios::in);
 	string nameOnFile;
@@ -84,7 +84,7 @@ int FileManager::authenticatePassword(string username, string password)
 		if (i != 3) {
 			cout << "Password incorrect please try again, " << (3 - i) << " tries remaining. \n";
 			cin >> password;
-			password = encryptPassword(password);
+			password = EncryptPassword(password);
 		}
 	}
 

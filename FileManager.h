@@ -11,7 +11,7 @@ public:
 protected:
 	std::string fileName; 
 	fstream* file = NULL; 
-	string encryptPassword(string password);
+	string EncryptPassword(string password);
 	void createFile(string fileName);
 	int collatz(int seed);
 };
