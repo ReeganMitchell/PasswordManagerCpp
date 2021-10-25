@@ -2,6 +2,7 @@
 #include <sstream>
 #include <iostream>
 #include <chrono>
+
 using namespace std;
 
 Analyser::Analyser():FileManager()
@@ -43,10 +44,16 @@ void Analyser::StrengthTest()
 {
 	ifstream infile;
 	infile.open(fileName, ios::in);
-
+	if (infile.peek() == EOF) {
+		cout << "Password Test File not Found \n";
+		return;
+	}
 	string password;
 	string testPass;
+
 	const int noOfPasswords = 100;
+	const double baseTimeAllowed = 100;
+
 	int noCorrect = 0;
 	double times[noOfPasswords];
 
@@ -65,7 +72,7 @@ void Analyser::StrengthTest()
 				diffTime = endTime - startTime;
 				double time = diffTime.count();
 				diffTime = endTime - startTime;
-				if (time > 0.001) {
+				if (time > baseTimeAllowed) {
 					break;
 				}
 
@@ -106,11 +113,11 @@ void Analyser::StrengthTest()
 				diffTime = endTime - startTime;
 				double time = diffTime.count();
 				diffTime = endTime - startTime;
-				if (time > 1.0) {
+				if (time > (baseTimeAllowed * 10)) {
 					break;
 				}
 
-				testPass = EncryptPassword(GeneratePassword(x + 1));
+				testPass = GeneratePassword(x + 1);
 			}
 			if (password == testPass) {
 				noCorrect++;
@@ -132,14 +139,16 @@ void Analyser::StrengthTest()
 	}
 
 	infile.close();
+
+	cout << "Strength Test Complete. \n";
 }
 
-int Analyser::ChooseRandomLetter()
+inline int Analyser::ChooseRandomLetter()
 {
 	return rand() % 25 + 97;
 }
 
-int Analyser::ChooseRandomASCII()
+inline int Analyser::ChooseRandomASCII()
 {
 	return rand() % 255 + 1;
 }

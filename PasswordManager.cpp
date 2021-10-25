@@ -80,6 +80,9 @@ void checkDetails() {
 	case 2:
 		cout << "failure! \n";//password wrong
 		break;
+	case 3:
+		cout << "Password File missing. \n";
+		break;
 	}
 }
 
@@ -96,5 +99,4 @@ void analyseFile()
 	cout << "Starting Strength Test. \n";
 	Analyser tester;
 	tester.StrengthTest();
-	cout << "Strength Test Complete. \n";
 }

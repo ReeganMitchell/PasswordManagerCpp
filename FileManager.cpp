@@ -25,7 +25,6 @@ string FileManager::EncryptPassword(string password)
 
 	password.copy(c, password.size() + 1);
 	c[password.size()] = '\0';
-	//std::cout << c << endl;
 
 	for (int x = 0; x < password.size(); x++) {
 		asciiOffset[x] = c[x] + offset;
@@ -61,6 +60,10 @@ int FileManager::authenticatePassword(string username, string password)
 	password = EncryptPassword(password);
 	ifstream infile; 
 	infile.open(fileName, ios::in);
+	if (infile.peek() == EOF) {
+		return 3;
+	}
+
 	string nameOnFile;
 	string passOnFile;
 
@@ -77,7 +80,7 @@ int FileManager::authenticatePassword(string username, string password)
 		}
 	}
 
-	for (int i = 0; i < 4; i++) {
+	for (auto i = 0; i < 4; i++) {
 		if (passOnFile == password) {
 			return 1;
 		}
@@ -89,7 +92,7 @@ int FileManager::authenticatePassword(string username, string password)
 	}
 
 	return 2;
-} // 0 = No username, 1 = correct, 2 = wrong password.
+} // 0 = No username, 1 = correct, 2 = wrong password, 3 = file not found.
 
 int FileManager::collatz(int seed)
 {
